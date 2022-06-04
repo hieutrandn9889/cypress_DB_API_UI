@@ -1,10 +1,10 @@
-const { defineConfig } = require('cypress')
+const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
-  projectId: '2pw1r7',
-  reporter: 'mochawesome',
+  projectId: "2pw1r7",
+  reporter: "mochawesome",
   reporterOptions: {
-    reportFilename: 'test-report',
+    reportFilename: "test-report",
   },
   retries: {
     runMode: 2,
@@ -12,10 +12,10 @@ module.exports = defineConfig({
   },
   env: {
     DB: {
-      user: 'myuser',
-      host: '127.0.0.1',
-      database: 'pokemon',
-      password: 'pass',
+      user: "myuser",
+      host: "127.0.0.1",
+      database: "pokemon",
+      password: "pass",
       port: 32763,
     },
   },
@@ -23,10 +23,10 @@ module.exports = defineConfig({
     // We've imported your old cypress plugins here.
     // You may want to clean this up later by importing these.
     setupNodeEvents(on, config) {
-      return require('./cypress/plugins/index.js')(on, config)
+      return require("./cypress/plugins/index.js")(on, config);
     },
-    specPattern: 'cypress/e2e/**/*.{feature,features}',
-    excludeSpecPattern: ['**/stepDefinitions/*', '*.js', '*.md'],
-    baseUrl: 'https://www.google.co.in',
+    specPattern: "cypress/e2e/**/*.*",
+    excludeSpecPattern: ["**/stepDefinitions/*", "*.js", "*.md"],
+    baseUrl: "https://www.google.co.in",
   },
-})
+});
