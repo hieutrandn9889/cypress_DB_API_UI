@@ -1,3 +1,8 @@
+# Build server
+
+npm i
+npm start
+
 # Build docker image
 
 docker login
