@@ -1,3 +1,6 @@
-# Cypress-TestFramework
+# Build docker image
 
-A Cypress Test Framework built as part of article series ## [Building a Test Automation Framework using Cypress.io](https://kushalbhalaik.xyz/blog/building-a-test-automation-framework-using-cypress-io-part-1/)
+docker login
+docker build -t cypress-included-v10.0.2 .
+docker images
+docker image tag cypress-included-v10.0.2 hieutrancypress/cypress-included-v10.0.2:1.0.0
