@@ -12,11 +12,11 @@ module.exports = defineConfig({
   },
   env: {
     DB: {
-      user: "myuser",
-      host: "127.0.0.1",
-      database: "pokemon",
-      password: "pass",
-      port: 32763,
+      user: "postgres",
+      host: "localhost",
+      database: "pokemonDB",
+      password: "Saobang9889",
+      port: 5432,
     },
   },
   e2e: {
