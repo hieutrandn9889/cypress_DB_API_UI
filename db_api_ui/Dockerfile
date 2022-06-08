@@ -67,13 +67,12 @@ RUN echo  " node version:    $(node -v) \n" \
   "firefox:         $(firefox --version || true) \n"
 
 #Instalclone Cypress-TestFramework to /e2e
-WORKDIR /e2e
-RUN git clone https://github.com/hieuTranEnouvo/cypress_DB_API_UI.git /e2e
-WORKDIR "/e2e/db_api_ui"
+RUN git clone https://github.com/hieuTranEnouvo/cypress_DB_API_UI.git
+WORKDIR "/db_api_ui"
 RUN ls
 RUN npm install
 
-ENTRYPOINT ["npm", "run"]
+ENTRYPOINT ["yarn", "cy:run"]
 
 #then you can directly run tests inside a container using image built with this file
 # docker run -it far11ven/cypress-included-v10.0.2:2.0.0 cy:test:qa
