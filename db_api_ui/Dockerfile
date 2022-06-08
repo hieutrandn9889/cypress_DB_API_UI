@@ -33,7 +33,7 @@ RUN id
 # point Cypress at the /root/cache no matter what user account is used
 # see https://on.cypress.io/caching
 ENV CYPRESS_CACHE_FOLDER=/root/.cache/Cypress
-RUN npm install -g "cypress@10.0.2"
+RUN npm install -g "cypress@10.0.3"
 
 # Cypress cache and installed version
 # should be in the root user's home folder
@@ -68,10 +68,9 @@ RUN echo  " node version:    $(node -v) \n" \
 
 #Instalclone Cypress-TestFramework to /e2e
 RUN git clone https://github.com/hieuTranEnouvo/cypress_DB_API_UI.git
-RUN cd ./cypress_DB_API_UI/db_api_ui
-RUN ls
-RUN yarn install
 WORKDIR /cypress_DB_API_UI/db_api_ui
+RUN yarn install
+
 
 CMD ["yarn", "cy:run"]
 

@@ -6,7 +6,23 @@ npm start
 # Build docker image
 
 docker login
-docker build -t cypress-included-v10.0.2 .
+
+# tao docker có tên test-cypress
+
+docker build -t test-cypress .
+
+# tao docker có tên test-cypress k có cache
+
+docker build -t test-cypress --no-cache .
+
+# run docker
+
+docker run --rm test-cypress
+
+# ssh
+
+docker run --rm -it test-cypress bash
+
 docker images
 docker image tag cypress-included-v10.0.2 hieutrancypress/cypress-included-v10.0.2:1.0.0
 
