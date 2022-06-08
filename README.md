@@ -7,29 +7,30 @@ npm start
 
 docker login
 
-# tao docker có tên test-cypress
+# tao docker có tên cypress-included-v10.0.3
 
-docker build -t test-cypress .
+docker build -t cypress-included-v10.0.3 .
 
-# tao docker có tên test-cypress k có cache
+# tao docker có tên cypress-included-v10.0.3 k có cache
 
-docker build -t test-cypress --no-cache .
+docker build -t cypress-included-v10.0.3 --no-cache .
 
 # run docker
 
-docker run --rm test-cypress
+docker run --rm cypress-included-v10.0.3
 
 # ssh
 
-docker run --rm -it test-cypress bash
+docker run --rm -it cypress-included-v10.0.3 bash
+
+# docker images
 
 docker images
-docker image tag cypress-included-v10.0.2 hieutrancypress/cypress-included-v10.0.2:1.0.0
+docker image tag cypress-included-v10.0.3 hieutrancypress/cypress-included-v10.0.3:1.0.0
 
-# verify
+# access denied
 
-example:
-docker run -it -v $PWD:/e2e -w /e2e cypress/included:10.0.2
-apply:
-docker run -it -v $PWD:/e2e -w /e2e hieutrancypress/cypress-included-v10.0.2
-docker run -it -v $PWD:/e2e -w /e2e hieutrancypress/cypress-included-v10.0.2 cy:test:dev
+1. create a access_token
+2. create a repo (15109889/hieutrancypress)
+3. docker tag cypress-included-v10.0.3:latest 15109889/hieutrancypress:v1
+4. docker push 15109889/hieutrancypress:v1
