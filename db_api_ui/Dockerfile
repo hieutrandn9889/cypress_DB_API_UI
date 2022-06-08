@@ -68,7 +68,7 @@ RUN echo  " node version:    $(node -v) \n" \
 
 #Instalclone Cypress-TestFramework to /e2e
 RUN git clone https://github.com/hieuTranEnouvo/cypress_DB_API_UI.git
-WORKDIR "/db_api_ui"
+RUN cd db_api_ui
 RUN ls
 RUN npm install
 
