@@ -1,6 +1,7 @@
+const endPoint = "http://localhost:3000/todos";
 describe("Write Fixture Demo", () => {
   it("Write static-schema response in a Json File", () => {
-    cy.request("GET", "http://localhost:3000/accounts").then((response) => {
+    cy.request("GET", `${endPoint}`).then((response) => {
       cy.writeFile(
         "cypress/fixtures/read-write/read-write.json",
         response.body
@@ -11,7 +12,7 @@ describe("Write Fixture Demo", () => {
   it("Write more objects in the array", () => {
     const fileName = "cypress/fixtures/read-write/read-write.json";
 
-    cy.request("GET", "http://localhost:3000/todos")
+    cy.request("GET", `${endPoint}`)
       .its("body")
       .each(($object) => {
         cy.readFile(fileName).then((list) => {

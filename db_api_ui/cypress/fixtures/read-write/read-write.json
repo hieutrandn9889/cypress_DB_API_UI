@@ -8,5 +8,15 @@
     "title": "wash dishes",
     "completed": true,
     "id": "2"
+  },
+  {
+    "title": "buy milk",
+    "completed": true,
+    "id": "1"
+  },
+  {
+    "title": "wash dishes",
+    "completed": true,
+    "id": "2"
   }
 ]

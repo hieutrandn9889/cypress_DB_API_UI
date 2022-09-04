@@ -5,24 +5,22 @@
 //-> The intention of cy.request() is to be used for checking endpoints on an actual, running server without having to start the front end application.
 
 // -> These are tests that do not modify the server state.
-
+const endPoint = "http://localhost:3000/todos";
 describe("Basic API Testing - Part #1", () => {
   beforeEach(function () {
-    cy.request("GET", "http://localhost:3000/todos").as("getTodos");
+    cy.request("GET", `${endPoint}`).as("getTodos");
   });
 
   it("Body Length - Test", () => {
-    cy.request("http://localhost:3000/todos")
-      .its("body")
-      .should("have.length", 2);
+    cy.request(`${endPoint}`).its("body").should("have.length", 2);
   });
 
   it("Request Status - Test", () => {
-    cy.request("http://localhost:3000/todos").its("status").should("eq", 200);
+    cy.request(`${endPoint}`).its("status").should("eq", 200);
   });
 
   it("header/content type - test", () => {
-    cy.request("http://localhost:3000/todos")
+    cy.request(`${endPoint}`)
       .its("headers")
       .its("content-type")
       .should("include", "application/json")
@@ -32,24 +30,22 @@ describe("Basic API Testing - Part #1", () => {
   const apiItems = [
     {
       title: "buy milk",
-      completed: false,
+      completed: true,
       id: "1",
     },
     {
       title: "wash dishes",
-      completed: false,
+      completed: true,
       id: "2",
     },
   ];
 
   it("Loading of initial items - test", () => {
-    cy.request("http://localhost:3000/todos")
-      .its("body")
-      .should("deep.eq", apiItems);
+    cy.request(`${endPoint}`).its("body").should("deep.eq", apiItems);
   });
 
   it("JSON Schema Validation", () => {
-    cy.request("http://localhost:3000/todos")
+    cy.request(`${endPoint}`)
       .its("body")
       .each((object) => {
         expect(object).to.have.all.keys("title", "completed", "id");
