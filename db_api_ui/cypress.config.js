@@ -27,6 +27,7 @@ module.exports = defineConfig({
     },
     specPattern: "cypress/e2e/**/*.*",
     excludeSpecPattern: ["**/stepDefinitions/*", "*.js", "*.md"],
+    experimentalWebKitSupport: true,
     baseUrl: "https://www.google.co.in",
   },
 });
