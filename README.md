@@ -34,3 +34,15 @@ docker image tag cypress-included-v10.7.0 hieutrancypress/cypress-included-v10.7
 2. create a repo (15109889/hieutrancypress)
 3. docker tag cypress-included-v10.7.0:latest 15109889/hieutrancypress:v1
 4. docker push 15109889/hieutrancypress:v1
+
+# How to install and run cypress:
+
+- cd e2e_automation
+- yarn
+- yarn install cypress
+- yarn cypress open
+- clicking on "analyticDatabaseChart.feature" file to run
+
+# How to general report:
+
+- node generate.js
