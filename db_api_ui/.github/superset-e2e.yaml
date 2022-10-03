@@ -1,0 +1,157 @@
+name: End-to-end tests
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the dev branch
+  pull_request:
+    branches:
+      - dev
+
+jobs:
+  build:
+    name: Build
+    runs-on: [actable-e2e]
+    env:
+      AWS_REGION: eu-west-2
+    steps:
+      - name: cleanup #https://github.com/actions/checkout/issues/211
+        run: |
+          sudo chown -R $USER:$USER $GITHUB_WORKSPACE
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push Ray image to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: actable-ray
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build \
+          --build-arg AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} \
+          --build-arg AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
+          --build-arg AWS_DEFAULT_REGION=${{ env.AWS_REGION }} \
+          -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f ray.Dockerfile .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+      - name: Build, tag, and push image to Amazon ECR
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: actable-superset
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile --target lean .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+  deploy:
+    name: Deploy
+    runs-on: [actable-e2e]
+    needs: build
+    env:
+      AWS_REGION: eu-west-2
+      EKS_CLUSTER_NAME: actable-dev-eks
+      HELM_RELEASE_NAME: superset
+      HELM_CHART_NAME: superset
+      NAMESPACE: test
+    steps:
+      - name: cleanup #https://github.com/actions/checkout/issues/211
+        run: |
+          sudo chown -R $USER:$USER $GITHUB_WORKSPACE
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Setup kubeconfig
+        id: setup-kubeconfig
+        run: |
+          aws eks --region $AWS_REGION update-kubeconfig --name $EKS_CLUSTER_NAME
+
+      - name: Setup git-secret
+        id: setup-gitsecret
+        run: |
+          git secret reveal -f
+
+      - name: Deploy Ray helm chart
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: actable-ray
+          IMAGE_TAG: ${{ github.sha }}
+          HELM_WORKSPACE: ${{ github.workspace }}/helm
+          HELM_RELEASE_NAME: ray
+          HELM_CHART_NAME: ray
+        run: |
+          cd $HELM_WORKSPACE
+          helm upgrade --timeout 600s --install $HELM_RELEASE_NAME $HELM_CHART_NAME \
+          --recreate-pods \
+          --namespace ${{ env.NAMESPACE }} \
+          --values $HELM_CHART_NAME/${{ env.NAMESPACE }}.yaml \
+          --set image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+      - name: Deploy superset helm chart
+        id: helm-deploy
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: actable-superset
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          echo "Helm upgrade"
+          cd helm
+          helm dependency update superset
+          helm upgrade --timeout 600s --install ${{ env.HELM_RELEASE_NAME }} ${{ env.HELM_CHART_NAME }} \
+          --namespace ${{ env.NAMESPACE }} \
+          --values ${{ env.HELM_CHART_NAME }}/${{ env.NAMESPACE }}.yaml \
+          --set image.repository=$ECR_REGISTRY/$ECR_REPOSITORY \
+          --set image.tag=$IMAGE_TAG
+
+  e2e-runAnalyticClassificationChart-test:
+    name: E2E Analytic Classification Chart
+    needs: deploy
+    runs-on: [actable]
+    defaults:
+      run:
+        working-directory: ./e2e_automation
+    container: cypress/browsers:node14.16.0-chrome89-ff86
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install cypress and verify
+        run: |
+          npm install
+          $(npm bin)/cypress verify
+
+      - name: Run Cypress
+        run: |
+          npm run runAnalyticClassificationChart
+        continue-on-error: false
+
+      - name: Generate HTML report
+        if: ${{ failure() }}
+        run: |
+          npm run generalReport
+
+      - name: Deploy report page to Github Page
+        if: ${{ failure() }}
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./e2e_automation/cypress/reports/cucumber/report.html
