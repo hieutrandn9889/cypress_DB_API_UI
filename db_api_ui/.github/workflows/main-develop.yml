@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     # Docker image with Cypress pre-installed
     # https://github.com/cypress-io/cypress-docker-images/tree/master/included
-    container: cypress/included:10.9.0
+    container: cypress/included:10.10.0
     steps:
       - uses: actions/checkout@v1
       - run: cd "db_api_ui" && npm install && npm run cy:test:qa
