@@ -8,84 +8,62 @@ export default class BasePage {
 
   // visit
   static enterUrl(url) {
-    cy.visit(url)
+    cy.visit(url);
   }
 
-   // log
-   static logUrl(url) {
-    cy.log(url)
+  // log
+  static logUrl(url) {
+    cy.log(url);
   }
 
   // clickGetElements
   static clickGetElements(elementFinder) {
-    cy.get(elementFinder)
-      .should('be.visible')
-      .click({ force: true })
+    cy.get(elementFinder).should("be.visible").click({ force: true });
   }
 
   static clickElements(elementFinder) {
-    cy.xpath(elementFinder)
-      .should('be.visible')
-      .click({ force: true })
+    cy.xpath(elementFinder).should("be.visible").click({ force: true });
   }
   static clickElementsMultiple(elementFinder) {
-    cy.xpath(elementFinder)
-      .should('be.visible')
-    click({ multiple: true })
+    cy.xpath(elementFinder).should("be.visible").click({ multiple: true });
   }
 
   //invoke
   static invokeXpathElements(ele1, ele2) {
-    cy.xpath(ele1)
-    .invoke('show')
-    cy.xpath(ele2).click({ force: true })
-    
+    cy.xpath(ele1).invoke("show");
+    cy.xpath(ele2).click({ force: true });
   }
 
   static typeValueNotElements(value) {
     cy.type(value);
   }
   static typeElements(elementFinder, value) {
-    cy.xpath(elementFinder)
-      .should('be.visible')
-      .type(value);
+    cy.xpath(elementFinder).should("be.visible").type(value);
   }
 
   static typeGetElements(elementFinder, value) {
-    cy.get(elementFinder)
-      .should('be.visible')
-      .type(value);
+    cy.get(elementFinder).should("be.visible").type(value);
   }
 
   static typeElementsEnter(elementFinder, value) {
-    cy.xpath(elementFinder)
-      .should('be.visible')
-      .type(`${value}{enter}`);
+    cy.xpath(elementFinder).should("be.visible").type(`${value}{enter}`);
   }
 
   static typeGetElementsEnter(elementFinder, value) {
-    cy.get(elementFinder)
-      .should('be.visible')
-      .type(`${value}{enter}`);
+    cy.get(elementFinder).should("be.visible").type(`${value}{enter}`);
   }
 
   static clearElements(elementFinder) {
-    cy.xpath(elementFinder)
-      .should('be.visible')
-      .clear();
-    console.log("test1")
+    cy.xpath(elementFinder).should("be.visible").clear();
+    console.log("test1");
   }
 
   static clearGetElements(elementFinder) {
-    cy.get(elementFinder)
-      .should('be.visible')
-      .clear();
+    cy.get(elementFinder).should("be.visible").clear();
   }
 
   static typeSpaceElements(elementFinder) {
-    cy.xpath(elementFinder)
-      .should('be.visible')
-      .type('  ');
+    cy.xpath(elementFinder).should("be.visible").type("  ");
   }
 
   static typeIncreaseGmailElements(elementFinder, value) {
@@ -98,9 +76,10 @@ export default class BasePage {
     cy.xpath(elementFinder).type(`${value}${index}`);
   }
 
-
   static typeRandomGmailElements(elementFinder, value) {
-    cy.xpath(elementFinder).type(`${value}+${this.randomStringNumber(3)}@enouvo.com`);
+    cy.xpath(elementFinder).type(
+      `${value}+${this.randomStringNumber(3)}@enouvo.com`
+    );
   }
 
   static typeRandomUsernameElements(elementFinder, value) {
@@ -108,54 +87,52 @@ export default class BasePage {
   }
 
   static drapAndDrop(elementFinder1, elementFinder2) {
-    cy.xpath(elementFinder1)
-      .first()
-      .trigger('dragstart');
-    cy.xpath(elementFinder2).trigger('drop');
+    cy.xpath(elementFinder1).first().trigger("dragstart");
+    cy.xpath(elementFinder2).trigger("drop");
   }
 
   static uploadFilePdfDifferentInputBtn(elementFinder) {
-    cy.fixture('2.pdf').then(fileContent => {
+    cy.fixture("2.pdf").then((fileContent) => {
       cy.get(elementFinder).upload(
         {
           fileContent,
-          fileName: '2.pdf',
-          mimeType: 'otherFile/pdf',
+          fileName: "2.pdf",
+          mimeType: "otherFile/pdf",
         },
-        { subjectType: 'drag-n-drop' }
+        { subjectType: "drag-n-drop" }
       );
     });
   }
 
   static uploadFileImageDifferentInputBtn(elementFinder) {
-    cy.fixture('1.jpg').then(fileContent => {
+    cy.fixture("1.jpg").then((fileContent) => {
       cy.get(elementFinder).upload(
         {
           fileContent,
-          fileName: '1.jpg',
-          mimeType: 'image/jpg',
+          fileName: "1.jpg",
+          mimeType: "image/jpg",
         },
-        { subjectType: 'drag-n-drop' }
+        { subjectType: "drag-n-drop" }
       );
     });
   }
 
   static uploadFileInputBtn(elementFinder) {
-    cy.fixture('1.jpg').then(fileContent => {
+    cy.fixture("1.jpg").then((fileContent) => {
       cy.get(elementFinder).upload(
         {
           fileContent,
-          fileName: '1.jpg',
-          mimeType: 'image/jpg',
+          fileName: "1.jpg",
+          mimeType: "image/jpg",
         },
-        { uploadType: 'input' }
+        { uploadType: "input" }
       );
     });
   }
 
   static randomStringNumber(length) {
-    let result = '';
-    const characters = '0123456789';
+    let result = "";
+    const characters = "0123456789";
     const charactersLength = characters.length;
     for (let i = 0; i < length; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
@@ -164,125 +141,115 @@ export default class BasePage {
   }
 
   static verifyGetElements(elementFinder) {
-    return cy.get(elementFinder).should('be.visible');
+    return cy.get(elementFinder).should("be.visible");
   }
 
   static verifyElements(elementFinder) {
-    return cy.xpath(elementFinder).should('be.visible');
+    return cy.xpath(elementFinder).should("be.visible");
   }
 
   static verifyNotElements(elementFinder) {
-    return cy.xpath(elementFinder).should('not.be.visible');
+    return cy.xpath(elementFinder).should("not.be.visible");
   }
 
   static verifyNotGetElements(elementFinder) {
-    return cy.get(elementFinder).should('not.be.visible');
+    return cy.get(elementFinder).should("not.be.visible");
   }
 
   static verifyUncheckElements(elementFinder) {
-    return cy
-      .xpath(elementFinder)
-      .should('be.visible')
-      .uncheck();
+    return cy.xpath(elementFinder).should("be.visible").uncheck();
   }
 
   static verifyElementsLenght(elementFinder, value) {
-    return cy.xpath(elementFinder).should('have.lenght', value);
-  }
-
-  static verifyElementsLenght(elementFinder, value) {
-    return cy.xpath(elementFinder).should('have.lenght', value);
+    return cy.xpath(elementFinder).should("have.lenght", value);
   }
 
   static scrollHeader() {
     return cy
-      .get('header')
-      .should('be.visible')
+      .get("header")
+      .should("be.visible")
       .scrollIntoView({ duration: 2000 });
   }
 
   static hoverButton(elementFinder) {
-    cy.xpath(elementFinder).trigger('mouseover', { force: true });
+    cy.xpath(elementFinder).trigger("mouseover", { force: true });
   }
 
   static hoverGetButton(elementFinder) {
-    return cy.get(elementFinder).trigger('mouseover', { force: true });
+    return cy.get(elementFinder).trigger("mouseover", { force: true });
   }
 
   static hoverImageCssDisplayIsNone(elementFinder) {
-    return cy
-      .xpath(elementFinder)
-      .invoke('show')
-      .click({ force: true });
+    return cy.xpath(elementFinder).invoke("show").click({ force: true });
   }
 
   static verifyXpathValueElement(elementFinder, value) {
-    cy.xpath(elementFinder).should('have.value', value);
+    cy.xpath(elementFinder).should("have.value", value);
   }
 
   static verifyGetValueElement(elementFinder, value) {
-    cy.get(elementFinder).should('have.value', value);
+    cy.get(elementFinder).should("have.value", value);
   }
 
   static verifyGetNotValueElement(elementFinder, value) {
-    cy.get(elementFinder).should('have.not.value', value);
+    cy.get(elementFinder).should("have.not.value", value);
   }
 
   static verifyXpathClassElement(elementFinder, value) {
-    cy.xpath(elementFinder).should('have.class', value);
+    cy.xpath(elementFinder).should("have.class", value);
   }
 
   static verifyGetClassElement(elementFinder, value) {
-    cy.get(elementFinder).should('have.class', value);
+    cy.get(elementFinder).should("have.class", value);
   }
 
   static verifyGetTextElement(elementFinder, value) {
-    cy.get(elementFinder).should('have.text', value);
+    cy.get(elementFinder).should("have.text", value);
   }
 
   static verifyXpathTextElement(elementFinder, value) {
-    cy.xpath(elementFinder).should('have.text', value);
+    cy.xpath(elementFinder).should("have.text", value);
   }
 
   static verifyGetContainsElement(elementFinder, value) {
-    cy.get(elementFinder).contains(value)
+    cy.get(elementFinder).contains(value);
   }
 
   static verifyXpathContainsElement(elementFinder, value) {
-    cy.xpath(elementFinder).contains(value)
+    cy.xpath(elementFinder).contains(value);
   }
 
   static verifyXpathVisibleElement(elementFinder, time) {
-    cy.xpath(elementFinder, { timeout: time }).should('be.visible');
+    cy.xpath(elementFinder, { timeout: time }).should("be.visible");
   }
 
   static verifyIncludeUrl(url) {
-    cy.url().should('include', url);
+    cy.url().should("include", url);
   }
 
   static verifyEqualUrl(url) {
-    cy.url().should('eq', url);
+    cy.url().should("eq", url);
   }
 
   //click button in alert
   static clickBtnInAlert(el) {
-    cy.on('window:alert', () => {
-      cy.xpath(el).click()
-    })
+    cy.on("window:alert", () => {
+      cy.xpath(el).click();
+    });
   }
 
   // alert contain
   static verifyAlertContain(value) {
-    cy.on('window:alert', (str) => {
-      expect(str).to.contain(value)
-    })
+    cy.on("window:alert", (str) => {
+      expect(str).to.contain(value);
+    });
   }
 
   // alert not contain
   static verifyAlertNotContain(value) {
-    cy.on('window:alert', (str) => {
-      expect(str).not.to.contain(value)
-    })
+    cy.on("window:alert", (str) => {
+      expect(str).not.to.contain(value);
+    });
   }
 
   static wait(time) {
@@ -296,21 +263,21 @@ export default class BasePage {
 
   // waiting an element
   static waitToElement(elem, time) {
-    cy.get(elem,{ timeout: time}).should('be.visible');;
+    cy.get(elem, { timeout: time }).should("be.visible");
   }
 
   static getTitleElement(elementFinder) {
     return new Promise((resolve, reject) =>
-      cy.get(elementFinder).then($elem => {
+      cy.get(elementFinder).then(($elem) => {
         // console.log($elem.attr('title'), 'dddd');
-        resolve($elem.attr('title'));
+        resolve($elem.attr("title"));
       })
     );
   }
 
   // scroll bottom
   static scrollToBottom() {
-    cy.scrollTo('bottom')
+    cy.scrollTo("bottom");
   }
 
   // scroll element
@@ -320,26 +287,24 @@ export default class BasePage {
 
   // select element
   static selectToElement(elem, value) {
-    cy.xpath(elem).select(value).should('have.value', value);
+    cy.xpath(elem).select(value).should("have.value", value);
   }
 
   // select test in table
   static selectElementValue(elem, value) {
-    cy.xpath(elem).select(value)
+    cy.xpath(elem).select(value);
   }
 
   // get href and go
   static getXpathAttributHref(elem) {
     cy.xpath(elem).then(function ($a) {
-      const href = $a.prop('href')
-      cy.visit(href)
-      cy.wait(1000)
-    })
+      const href = $a.prop("href");
+      cy.visit(href);
+      cy.wait(1000);
+    });
   }
   // contains
-  static containsElement( value) {
-    cy.contains('p', value)
+  static containsElement(value) {
+    cy.contains("p", value);
   }
-  
-
 }
