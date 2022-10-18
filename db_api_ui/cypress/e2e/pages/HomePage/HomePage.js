@@ -1,16 +1,14 @@
-var elements = require('./elements')
-class HomePage {
-  clickSearchTxtBox() {
-    return cy.get(elements.HOMEPAGE.SEARCH_TXTBOX).click();
-  }
+import HomePageUI from "../../interfaces/homePageUI";
+import BasePage from "../../intergration/basePage";
 
-  typeInSearchTxtBox(value) {
-    return cy.xpath(elements.HOMEPAGE.SEARCH_TXTBOX_XPATH).type(value);
+export default class HomePage extends BasePage {
+  static clickSearchTxtBox() {
+    this.clickGetElements(HomePageUI.SEARCH_TXTBOX);
   }
-
-  submitSearchQuery() {
-    return cy.get(elements.HOMEPAGE.SEARCH_TXTBOX).type('{enter}');
+  static typeInSearchTxtBox() {
+    this.typeElements(HomePageUI.SEARCH_TXTBOX_XPATH);
   }
-
+  static submitSearchQuery() {
+    cy.get(HomePageUI.SEARCH_TXTBOX).type("{enter}");
   }
-  export default HomePage;
+}

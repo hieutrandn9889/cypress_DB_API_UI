@@ -46,7 +46,7 @@ module.exports = (on, config) => {
     return fs.readJson(pathToConfigFile);
   }
   //if no environment is provided, then QA env will be default
-  const env = config.env.configFile || "qa";
+  const env = config.env.configFile || "dev";
 
   return getConfigurationByFile(env);
 };
