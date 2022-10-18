@@ -10,7 +10,9 @@
     "run": "./node_modules/.bin/cypress run",
     "test:dev": "node runner.js cypress run --env configFile=dev",
     "runCucumber": "cypress run --browser chrome --spec '**/API/GetPokemonId.feature'",
-    "generalReport": "node reportCucumber.js"
+    "generalReport": "node reportCucumber.js",
+    "run_key": "yarn cypress run --record --key 7b525175-b127-4285-9480-1b4a1c044af1",
+    "runParallel": "cypress run --browser chrome --record --key 7b525175-b127-4285-9480-1b4a1c044af1 --parallel --spec '**/analyticDatabase/analyticDatabaseUnivariateChart.feature'"
   },
   "author": "far11ven",
   "license": "ISC",
