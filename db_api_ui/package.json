@@ -6,9 +6,9 @@
   "main": "",
   "scripts": {
     "test": "./node_modules/.bin/cypress run",
-    "cy:open": "./node_modules/.bin/cypress open",
-    "cy:run": "./node_modules/.bin/cypress run",
-    "cy:test:dev": "node runner.js cypress run --env configFile=dev",
+    "open": "./node_modules/.bin/cypress open",
+    "run": "./node_modules/.bin/cypress run",
+    "test:dev": "node runner.js cypress run --env configFile=dev",
     "runCucumber": "cypress run --browser chrome --spec '**/API/GetPokemonId.feature'",
     "generalReport": "node reportCucumber.js"
   },
