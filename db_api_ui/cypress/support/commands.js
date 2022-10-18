@@ -82,3 +82,12 @@ Cypress.Commands.add("clearState", () => {
   });
   cy.log("Test state was reset");
 });
+
+Cypress.Commands.add("loginUserTest", (username, password, url) => {
+  cy.visit(url);
+  cy.wait(3000);
+  cy.xpath(LoginDevNightlyUI.inputUsename).type(username);
+  cy.xpath(LoginDevNightlyUI.inputPassword).type(password);
+  cy.xpath(LoginDevNightlyUI.submitLoginBtn).click();
+  cy.wait(3000);
+});
