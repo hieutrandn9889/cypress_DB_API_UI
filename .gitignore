@@ -13,7 +13,6 @@
 
 # dependencies
 /node_modules
-/mochawesome-report
 /reports
 /src/test/videos
 /src/test/screenshots
