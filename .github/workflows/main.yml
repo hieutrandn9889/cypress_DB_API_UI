@@ -14,9 +14,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: npm install
+        run: |
+          npm install
+
       - name: Run Testing
         run: |
-          cd "db_api_ui" && npm install && npm run runCucumber
+          cd "db_api_ui" && npm run runCucumber
         continue-on-error: false
 
     # steps:
