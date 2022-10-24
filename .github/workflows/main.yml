@@ -23,6 +23,10 @@ jobs:
           cd "db_api_ui" && npm run runCucumber
         continue-on-error: false
 
+      - name: Generate reports
+        run: cd "db_api_ui" && npm run generalReport
+        continue-on-error: false
+
     # steps:
     #   - uses: actions/checkout@v2
     #   # - run: cd "db_api_ui" && npm install && npm run cy:record:parallel:qa --ci-build-id ${{ github.run_id }}
