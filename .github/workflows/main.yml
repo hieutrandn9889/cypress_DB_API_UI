@@ -9,11 +9,10 @@ jobs:
     strategy:
       matrix:
         job: [0]
-    # Docker image with Cypress pre-installed
-    # https://github.com/cypress-io/cypress-docker-images/tree/master/included
+
     container: cypress/included:10.10.0
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout
       # - run: cd "db_api_ui" && npm install && npm run cy:record:parallel:qa --ci-build-id ${{ github.run_id }}
       - name: Run Testing
         run: cd "db_api_ui" && npm run runCucumber
