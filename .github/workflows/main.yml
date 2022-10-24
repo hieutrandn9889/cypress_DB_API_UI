@@ -15,10 +15,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       # - run: cd "db_api_ui" && npm install && npm run cy:record:parallel:qa --ci-build-id ${{ github.run_id }}
-      - run:
-          name: Run Testing
-          command: cd "db_api_ui" && npm run runCucumber
+      - name: Run Testing
+        run: cd "db_api_ui" && npm run runCucumber
 
-      - run:
-          name: Generate Cucumber Report
-          command: cd "db_api_ui" && npm run generalReport
+      - name: Run Testing
+        run: cd "db_api_ui" && npm run generalReport
