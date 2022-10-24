@@ -12,7 +12,11 @@ jobs:
 
     container: cypress/included:10.10.0
     steps:
-      - uses: actions/checkout
+      - uses: actions/checkout@v2
+      - name: Install cypress and verify
+        run: |
+          npm install
+          $(npm bin)/cypress verify
       # - run: cd "db_api_ui" && npm install && npm run cy:record:parallel:qa --ci-build-id ${{ github.run_id }}
       - name: Run Testing
         run: cd "db_api_ui" && npm run runCucumber
