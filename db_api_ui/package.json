@@ -11,6 +11,9 @@
     "test:dev": "node runner.js cypress run --env configFile=dev",
     "runCucumber": "cypress run --browser chrome --spec '**/API/GetPokemonId.feature'",
     "generalReport": "node reportCucumber.js",
+    "removeFile": "node removeFile.js",
+    "zipFolder": "node zipFolder.js",
+    "sendEmail": "node sendEmail.js",
     "run_key": "yarn cypress run --record --key 7b525175-b127-4285-9480-1b4a1c044af1",
     "runParallel": "cypress run --browser chrome --record --key 7b525175-b127-4285-9480-1b4a1c044af1 --parallel --spec '**/analyticDatabase/analyticDatabaseUnivariateChart.feature'"
   },
@@ -37,6 +40,10 @@
     "stepDefinitions": "cypress/e2e"
   },
   "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
+    "archiver": "^5.3.1",
+    "dotenv": "^16.0.3",
+    "fs-extra": "^10.1.0",
     "playwright-webkit": "^1.25.2"
   }
 }

@@ -18,6 +18,11 @@ jobs:
         run: |
           cd "db_api_ui" && npm install
 
+      - name: Remove files
+        run: |
+          cd "db_api_ui" && npm run removeFile
+        continue-on-error: false
+
       - name: Run Testing
         run: |
           cd "db_api_ui" && npm run runCucumber
@@ -27,11 +32,10 @@ jobs:
         run: cd "db_api_ui" && npm run generalReport
         continue-on-error: false
 
-    # steps:
-    #   - uses: actions/checkout@v2
-    #   # - run: cd "db_api_ui" && npm install && npm run cy:record:parallel:qa --ci-build-id ${{ github.run_id }}
-    #   - name: Run Testing
-    #     run: cd "db_api_ui" && npm run runCucumber
+      - name: Zip folder
+        run: cd "db_api_ui" && npm run zipFolder
+        continue-on-error: false
 
-    #   - name: Run Testing
-    #     run: cd "db_api_ui" && npm run generalReport
+      - name: Send email
+        run: cd "db_api_ui" && npm run sendEmail
+        continue-on-error: false
