@@ -11,4 +11,4 @@ jobs:
     container: cypress/included:10.10.0
     steps:
       - uses: actions/checkout@v1
-      - run: cd "db_api_ui" && npm install && npm run cy:test:qa
+      - run: cd "db_api_ui" && npm install && npm run runCucumber
