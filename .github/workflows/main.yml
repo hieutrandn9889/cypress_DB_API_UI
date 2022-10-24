@@ -14,4 +14,5 @@ jobs:
     container: cypress/included:10.10.0
     steps:
       - uses: actions/checkout@v2
-      - run: cd "db_api_ui" && npm install && npm run cy:record:parallel:qa --ci-build-id ${{ github.run_id }}
+      # - run: cd "db_api_ui" && npm install && npm run cy:record:parallel:qa --ci-build-id ${{ github.run_id }}
+      - run: cd "db_api_ui" && npm install && npm run runCucumber
