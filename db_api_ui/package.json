@@ -9,7 +9,7 @@
     "open": "./node_modules/.bin/cypress open",
     "run": "./node_modules/.bin/cypress run",
     "test:dev": "node runner.js cypress run --env configFile=dev",
-    "runCucumber": "cypress run --browser chrome --spec '**/API/GetPokemonId.feature'",
+    "runCucumber": "cypress run --browser chrome --spec '**/API/DBTest.feature'",
     "generalReport": "node reportCucumber.js",
     "removeFile": "node removeFile.js",
     "zipFolder": "node zipFolder.js",
