@@ -1,4 +1,4 @@
-# Build server1
+# Build server
 
 npm i
 npm start
