@@ -46,7 +46,6 @@ jobs:
         with:
           name: the-build
           if-no-files-found: error
-          path: build
           retention-days: 1
 
   # e2e:
