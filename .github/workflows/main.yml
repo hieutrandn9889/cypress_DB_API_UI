@@ -30,9 +30,6 @@ jobs:
     name: e2e Tests
     runs-on: ubuntu-latest
     needs: build
-    defaults:
-      run:
-        working-directory: ./cypress_DB_API_UI
 
     strategy:
       fail-fast: false
