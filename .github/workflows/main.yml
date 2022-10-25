@@ -20,22 +20,22 @@ jobs:
 
       - name: Remove files
         run: |
-          cd "db_api_ui" && yarn run removeFile
+          cd "db_api_ui" && yarn removeFile
         continue-on-error: false
 
       - name: Run Testing
         run: |
-          cd "db_api_ui" && yarn run runCucumber
+          cd "db_api_ui" && yarn runCucumber
         continue-on-error: false
 
       - name: Generate reports
-        run: cd "db_api_ui" && yarn run generalReport
+        run: cd "db_api_ui" && yarn generalReport
         continue-on-error: false
 
       - name: Zip folder
-        run: cd "db_api_ui" && yarn run zipFolder
+        run: cd "db_api_ui" && yarn zipFolder
         continue-on-error: false
 
       - name: Send email
-        run: cd "db_api_ui" && yarn run sendEmail
+        run: cd "db_api_ui" && yarn sendEmail
         continue-on-error: false
