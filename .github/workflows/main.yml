@@ -77,12 +77,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Download the build
-        uses: actions/download-artifact@v2
-        with:
-          name: the-build
-          path: build
-
       - name: Setup Node
         uses: actions/setup-node@v2.1.2
         with:
