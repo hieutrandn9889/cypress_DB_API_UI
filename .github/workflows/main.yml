@@ -40,36 +40,15 @@ jobs:
       - name: Install packages
         run: yarn install --frozen-lockfile
 
-      # Save build for other jobs
-      # - name: Save build folder
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: the-build
-      #     if-no-files-found: error
-      #     path: build
-      #     retention-days: 1
-
   e2e:
     name: e2e Tests
-    runs-on: ubuntu-latest
-    needs: build
-
+    defaults:
+      run:
+        working-directory: ./cypress_DB_API_UI
     strategy:
       fail-fast: false
       matrix:
         job: [0]
-
-    services:
-      postgres:
-        image: postgres:latest
-        ports: ["5432:5432"]
-        # Make sure the database is ready before we use it
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
-        # These need to be set on the service or it won't start for some reason
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: Saobang9889
-          POSTGRES_DB: pokemonDB
 
     container: cypress/included:10.10.0
 
@@ -114,7 +93,7 @@ jobs:
         if: failure()
         with:
           name: cypress-screenshots
-          path: cypress/screenshots
+          path: db_api_ui/cypress/screenshots
 
       - name: Upload Cypress Logs
         uses: actions/upload-artifact@v1
@@ -122,7 +101,7 @@ jobs:
         if: failure()
         with:
           name: cypress-logs
-          path: cypress/logs
+          path: db_api_ui/cypress/logs
 
       - name: Upload Cypress Videos
         uses: actions/upload-artifact@v1
@@ -130,4 +109,4 @@ jobs:
         if: failure()
         with:
           name: cypress-videos
-          path: cypress/videos
+          path: db_api_ui/cypress/videos
