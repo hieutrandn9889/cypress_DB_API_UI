@@ -42,6 +42,7 @@ jobs:
 
   e2e:
     name: e2e Tests
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./cypress_DB_API_UI
