@@ -1,5 +1,5 @@
-import HomePageUI from "../../interfaces/homePageUI";
-import BasePage from "../../intergration/basePage";
+import HomePageUI from "../interfaces/homePageUI";
+import BasePage from "../intergration/basePage";
 
 export default class HomePage extends BasePage {
   static clickSearchTxtBox() {

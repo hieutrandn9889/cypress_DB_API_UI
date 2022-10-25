@@ -1,5 +1,5 @@
-import AnalyticDatabaseChartUI from "../../interfaces/analyticDatabaseChartUI";
-import BasePage from "../../intergration/basePage";
+import AnalyticDatabaseChartUI from "../interfaces/analyticDatabaseChartUI";
+import BasePage from "../intergration/basePage";
 
 export default class AnalyticDatabaseChartPage extends BasePage {
   static enterUrlToAnalytic(url) {

@@ -1,5 +1,5 @@
-import ResultPageUI from "../../interfaces/resultPageUI";
-import BasePage from "../../intergration/basePage";
+import ResultPageUI from "../interfaces/resultPageUI";
+import BasePage from "../intergration/basePage";
 
 export default class AnalyticDatabaseChartPage extends BasePage {
   static resultSearch() {
