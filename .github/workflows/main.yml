@@ -5,12 +5,30 @@ on:
     branches: [main]
 env:
   NODE_ENV: test
-  DATABASE_URL: postgresql://postgres:postgres@localhost/pokemonDB?schema=ci
+  DATABASE_URL: postgres://postgres:Saobang9889@postgres:5432/pokemonDB
 
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+
+    postgres-job:
+    container: node:latest
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: pokemonDB
+          POSTGRES_PASSWORD: Saobang9889
+          POSTGRES_PORT: 5432
+          POSTGRES_USER: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -45,7 +63,7 @@ jobs:
 
   #   services:
   #     postgres:
-  #       image: postgres:15.0
+  #       image: postgres:latest
   #       ports: ["5432:5432"]
   #       # Make sure the database is ready before we use it
   #       options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
