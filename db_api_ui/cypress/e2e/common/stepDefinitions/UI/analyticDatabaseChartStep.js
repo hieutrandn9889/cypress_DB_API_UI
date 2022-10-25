@@ -1,5 +1,5 @@
 import { Then } from "cypress-cucumber-preprocessor/steps";
-import AnalyticDatabaseChartPage from "../../../pages/AnalyticsDatabasePage/analyticDatabaseChartPage";
+import AnalyticDatabaseChartPage from "../../../pages/analyticDatabaseChartPage";
 
 Then("I enter url {string} to check", (url) => {
   cy.wait(1000);
