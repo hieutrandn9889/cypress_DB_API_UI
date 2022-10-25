@@ -41,12 +41,13 @@ jobs:
         run: yarn install --frozen-lockfile
 
       # Save build for other jobs
-      - name: Save build folder
-        uses: actions/upload-artifact@v2
-        with:
-          name: the-build
-          if-no-files-found: error
-          retention-days: 1
+      # - name: Save build folder
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: the-build
+      #     if-no-files-found: error
+      #     path: build
+      #     retention-days: 1
 
   # e2e:
   #   name: e2e Tests
