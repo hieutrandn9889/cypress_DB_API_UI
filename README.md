@@ -46,3 +46,9 @@ docker image tag cypress-included-v10.10.0 hieutrancypress/cypress-included-v10.
 # How to general report:
 
 - node generate.js
+
+# git
+
+git log --oneline
+git reset --soft c755b60
+git push origin main -f
