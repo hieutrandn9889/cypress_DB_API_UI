@@ -44,6 +44,6 @@
     "archiver": "^5.3.1",
     "dotenv": "^16.0.3",
     "fs-extra": "^10.1.0",
-    "playwright-webkit": "^1.25.2"
+    "playwright-webkit": "^1.27.1"
   }
 }
