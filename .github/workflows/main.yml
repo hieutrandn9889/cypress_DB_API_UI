@@ -47,3 +47,12 @@ jobs:
       - name: Send email
         run: cd "db_api_ui" && yarn sendEmail
         continue-on-error: false
+
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_USERNAME: hieutran
+          SLACK_TITLE: Regression Test
+          SLACK_MESSAGE: "New changes :rocket:"
+          SLACK_COLOR: ${{ job.status }}
