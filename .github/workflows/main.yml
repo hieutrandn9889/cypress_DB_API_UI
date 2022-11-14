@@ -10,7 +10,7 @@ jobs:
       matrix:
         job: [0]
 
-    container: cypress/included:10.10.0
+    container: cypress/included:11.0.1
 
     steps:
       - uses: actions/checkout@v3
