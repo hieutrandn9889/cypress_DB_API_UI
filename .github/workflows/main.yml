@@ -41,7 +41,6 @@ jobs:
         if: always()
         with:
           name: cypress-execution-report
-          run: cd "db_api_ui"
           path: cypress/reports/cucumber/report.html
           retention-days: 30
 
