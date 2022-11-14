@@ -35,6 +35,15 @@ jobs:
       - name: Zip folder
         run: cd "db_api_ui" && yarn zipFolder
         continue-on-error: false
+      
+      - name: Uploading artifact
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: cypress-execution-report
+          run: cd "db_api_ui"
+          path: cypress/reports/cucumber/report.html
+          retention-days: 30
 
       - name: Send email
         run: cd "db_api_ui" && yarn sendEmail
