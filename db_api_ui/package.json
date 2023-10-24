@@ -20,14 +20,14 @@
   "author": "far11ven",
   "license": "ISC",
   "devDependencies": {
-    "cypress": "^12.7",
+    "cypress": "^13.3.2",
     "cypress-cucumber-preprocessor": "^4.3.1",
     "cypress-xpath": "^2.0.1",
     "lodash": "^4.17.21",
-    "minimist": "^1.2.7",
+    "minimist": "^1.2.8",
     "moment": "^2.29.4",
-    "multiple-cucumber-html-reporter": "^3.0.1",
-    "pg": "^8.8.0"
+    "multiple-cucumber-html-reporter": "^3.5.0",
+    "pg": "^8.11.3"
   },
   "cypress-cucumber-preprocessor": {
     "cucumberJson": {
@@ -41,9 +41,9 @@
   },
   "dependencies": {
     "@sendgrid/mail": "^7.7.0",
-    "archiver": "^5.3.1",
-    "dotenv": "^16.0.3",
-    "fs-extra": "^10.1.0",
-    "playwright-webkit": "^1.27.1"
+    "archiver": "^6.0.1",
+    "dotenv": "^16.3.1",
+    "fs-extra": "^11.1.1",
+    "playwright-webkit": "^1.39.0"
   }
 }
